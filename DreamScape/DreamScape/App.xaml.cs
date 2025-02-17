@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using DreamScape.Data;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -33,6 +34,16 @@ namespace DreamScape
         public App()
         {
             this.InitializeComponent();
+
+            bool rebuildDb = true;
+            if (rebuildDb)
+            {
+                using (AppDbContext db = new AppDbContext())
+                {
+                    db.Database.EnsureDeleted();
+                    db.Database.EnsureCreated();
+                }
+            }
         }
 
         /// <summary>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="DreamScape.Universal.RegisterPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DreamScape.Universal"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock HorizontalAlignment="Center" TextAlignment="Center" FontSize="80" Text="Register" Margin="100"/>
+
+
+        <StackPanel
+            Grid.Row="1"
+            Margin="30"
+            HorizontalAlignment="Center"
+            Spacing="20">
+
+
+
+            <TextBox
+                x:Name="emailBox"
+                Width="400"
+                FontSize="30"
+                Header="E-Mail"
+                MaxLength="255"
+                KeyDown="emailBox_KeyDown"
+                PlaceholderText="player@example.com" />
+
+            <PasswordBox
+                x:Name="passBox"
+                Width="400"
+                FontSize="30"
+                Header="Password"
+                MaxLength="255"
+                KeyDown="passBox_KeyDown"
+                PlaceholderText="pass123" />
+
+            <Button
+                x:Name="registerButton"
+                Width="400"
+                HorizontalAlignment="Center"
+                Content="Create Account"
+                Click="registerButton_Click"
+                
+                FontSize="30" />
+
+
+            <Button
+                x:Name="backButton"
+                Width="400"
+                HorizontalAlignment="Center"
+                Content="Back"
+                FontSize="30"
+                Click="backButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>
