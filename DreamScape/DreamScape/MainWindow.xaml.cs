@@ -26,11 +26,8 @@ namespace DreamScape
         public MainWindow()
         {
             this.InitializeComponent();
+            MainFrame.Navigate(typeof(LoginPage));
         }
 
-        private void myButton_Click(object sender, RoutedEventArgs e)
-        {
-            myButton.Content = "Clicked";
-        }
     }
 }
