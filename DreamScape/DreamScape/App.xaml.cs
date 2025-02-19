@@ -35,15 +35,15 @@ namespace DreamScape
         {
             this.InitializeComponent();
 
-            bool rebuildDb = true;
-            if (rebuildDb)
-            {
-                using (AppDbContext db = new AppDbContext())
-                {
-                    db.Database.EnsureDeleted();
-                    db.Database.EnsureCreated();
-                }
-            }
+            //bool rebuildDb = true;
+            //if (rebuildDb)
+            //{
+            //    using (AppDbContext db = new AppDbContext())
+            //    {
+            //        db.Database.EnsureDeleted();
+            //        db.Database.EnsureCreated();
+            //    }
+            //}
         }
 
         /// <summary>
