@@ -14,7 +14,9 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="LoginPage.xaml" />
-    <None Remove="Universal\RegisterPage.xaml" />
+    <None Remove="Pages\Player\ItemDescriptionWindow.xaml" />
+    <None Remove="Pages\Player\PlayerDashboard.xaml" />
+    <None Remove="Pages\Universal\RegisterPage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,9 +43,18 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.12">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.1742" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.250205002" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\Player\ItemDescriptionWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="LoginPage.xaml">
@@ -52,6 +63,11 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Universal\RegisterPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\Player\PlayerDashboard.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
