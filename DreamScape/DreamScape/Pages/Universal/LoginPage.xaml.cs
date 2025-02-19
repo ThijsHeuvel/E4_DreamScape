@@ -15,6 +15,8 @@ using Microsoft.UI.Xaml.Navigation;
 using DreamScape.Universal;
 using DreamScape.Data;
 using DreamScape.Data.Models;
+using DreamScape.Pages.Player;
+using DreamScape.Data.Utility;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -87,7 +89,15 @@ namespace DreamScape
                 }
 
                 Session.Instance.User = user;
-                Helper.ShowPopup("Success", "Login Successful! Logging in as " + Session.Instance.User.Role.ToString(), this.XamlRoot);
+                if (user.Role == Role.Admin)
+                {
+                    // Go to Admin Dashboard
+                    return;
+                }
+                else
+                {
+                    Frame.Navigate(typeof(PlayerDashboard));
+                }
             }
         }
 
