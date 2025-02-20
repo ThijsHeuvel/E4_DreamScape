@@ -17,6 +17,7 @@ using DreamScape.Data;
 using DreamScape.Data.Models;
 using DreamScape.Pages.Player;
 using DreamScape.Data.Utility;
+using DreamScape.Pages.Admin;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -91,7 +92,7 @@ namespace DreamScape
                 Session.Instance.User = user;
                 if (user.Role == Role.Admin)
                 {
-                    // Go to Admin Dashboard
+                    Frame.Navigate(typeof(AdminMainPage));
                     return;
                 }
                 else

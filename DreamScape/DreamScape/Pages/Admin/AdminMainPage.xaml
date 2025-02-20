@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="DreamScape.Pages.Admin.AdminMainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DreamScape.Pages.Admin"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <NavigationView
+            x:Name="adminNv"
+            IsBackButtonVisible="Collapsed"
+            IsSettingsVisible="False"
+            PaneDisplayMode="Top"
+            SelectionChanged="adminNv_SelectionChanged"
+            SelectedItem="0">
+            <NavigationView.MenuItems>
+                <NavigationViewItem x:Name="ItemsView"
+                                    Content="Update Items"
+                                    Icon="Edit"
+                                    Tag="Items"/>
+
+                <NavigationViewItem x:Name="CreateUserView"
+                                    Content="Create a Player"
+                                    Icon="AddFriend"/>
+
+                <NavigationViewItem x:Name="GiveItemView"
+                                    Content="Give Items"
+                                    Icon="Add"/>
+            </NavigationView.MenuItems>
+            <Frame x:Name="adminFrame"/>
+        </NavigationView>
+    </Grid>
+</Page>
