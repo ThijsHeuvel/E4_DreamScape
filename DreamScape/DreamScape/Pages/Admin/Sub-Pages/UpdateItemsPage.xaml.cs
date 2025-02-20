@@ -191,5 +191,20 @@ namespace DreamScape.Pages.Admin.Sub_Pages
 
         }
 
+        private void deleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            Item item = (sender as Button).CommandParameter as Item;
+            if (item != null)
+            {
+                using (AppDbContext db = new AppDbContext())
+                {
+                    db.Items.RemoveRange(item);
+                    // Remove all player items with the item id
+                    db.PlayerItems.RemoveRange(db.PlayerItems.Where(pi => pi.ItemId == item.Id));
+                    db.SaveChanges();
+                }
+                LoadAllItems();
+            }
+        }
     }
 }
