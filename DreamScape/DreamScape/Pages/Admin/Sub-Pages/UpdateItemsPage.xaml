@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="DreamScape.Pages.Admin.Sub_Pages.UpdateItemsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DreamScape.Data.Utility"
+    xmlns:localData="using:DreamScape.Data.Models"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <local:RarityColorConverter x:Key="RarityColorConverter"/>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Column="0" Text="All Items" FontSize="50" Margin="20"/>
+        <TextBlock Grid.Column="1" Text="Item Details" FontSize="50" Margin="20"/>
+        <TextBlock Grid.Column="2" Text="Create Item" FontSize="50" Margin="20"/>
+        
+        <!--Main Content-->
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!--All Items View-->
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBox PlaceholderText="Search.." FontSize="20" Width="250" Grid.Row="0" HorizontalAlignment="Left" Margin="10" x:Name="seachAllItems" TextChanged="seachAllItems_TextChanged"/>
+                <ScrollViewer Grid.Column="0" Grid.Row="1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <ListView x:Name="allItemsListView" SelectionChanged="allItemsListView_SelectionChanged">
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="localData:Item">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Grid.Column="0" Text="{x:Bind Name}" FontSize="20" FontWeight="Bold"/>
+                                        <TextBlock Grid.Column="1" Text="{x:Bind Type}" FontSize="20"/>
+                                        <TextBlock Grid.Column="2" Text="{x:Bind Rarity}" FontSize="20" Foreground="{Binding Rarity, Converter={StaticResource RarityColorConverter}}" FontWeight="Bold"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+                </ScrollViewer>
+            </Grid>
+
+            <!-- Update View -->
+            <Grid Grid.Column="1" VerticalAlignment="Center">
+                <TextBlock HorizontalAlignment="Center" TextAlignment="Center" FontSize="25" 
+                Text="Select an item to get started" x:Name="selectItemTbl"/>
+                <ScrollViewer>
+                    <Grid Visibility="Collapsed" x:Name="updateItemGrid">
+                        <StackPanel Orientation="Vertical" Spacing="16" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBox Text="Item" FontSize="20" x:Name="itemEditTb" Width="400" MaxLength="255" Header="*Name" 
+                                     Margin="0,8,0,0"/>
+
+                            <TextBox Text="Description" FontSize="20" x:Name="descriptionEditTb" Width="400" 
+                                     MinHeight="100" MaxHeight="200" AcceptsReturn="True" MaxLength="400" 
+                                     Header="*Description" TextWrapping="Wrap" Margin="0,8,0,0"/>
+
+                            <ComboBox x:Name="itemTypeCb" FontSize="20" Width="400" Header="*Item Type" Margin="0,8,0,0">
+                                <ComboBoxItem Content="Defense"/>
+                                <ComboBoxItem Content="Melee Weapon"/>
+                                <ComboBoxItem Content="Ranged Weapon"/>
+                            </ComboBox>
+
+                            <ComboBox x:Name="itemRarityCb" FontSize="20" Width="400" Header="*Item Rarity" Margin="0,8,0,0">
+                                <ComboBoxItem Content="Common"/>
+                                <ComboBoxItem Content="Uncommon"/>
+                                <ComboBoxItem Content="Rare"/>
+                                <ComboBoxItem Content="Legendary"/>
+                                <ComboBoxItem Content="Mythic"/>
+                            </ComboBox>
+
+                            <TextBox Text="Additional Effects" FontSize="20" x:Name="additionalEffectsEditTb" Width="400" 
+                            Height="200" AcceptsReturn="True" MaxLength="400" Header="Additional Effects" 
+                            TextWrapping="Wrap" Margin="0,8,0,0"/>
+
+                            <Button Content="Update" FontSize="20" Width="400" x:Name="updateButton" Margin="0,16,0,20" VerticalAlignment="Center" Click="updateButton_Click"/>
+                        </StackPanel>
+                    </Grid>
+                </ScrollViewer>
+            </Grid>
+
+            <!--Create View-->
+            <Grid Grid.Column="2">
+                <ScrollViewer>
+                    <StackPanel Orientation="Vertical" Spacing="16" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBox PlaceholderText="Item" FontSize="20" x:Name="itemCreateTb" Width="400" MaxLength="255" Header="*Name" 
+                                  Margin="0,8,0,0"/>
+
+                        <TextBox PlaceholderText="Description" FontSize="20" x:Name="descriptionCreateTb" Width="400" 
+                                  MinHeight="100" MaxHeight="200" AcceptsReturn="True" MaxLength="400" 
+                                  Header="*Description" TextWrapping="Wrap" Margin="0,8,0,0"/>
+
+                        <ComboBox x:Name="itemTypeCreateCb" FontSize="20" Width="400" Header="*Item Type" Margin="0,8,0,0">
+                            <ComboBoxItem Content="Defense"/>
+                            <ComboBoxItem Content="Melee Weapon"/>
+                            <ComboBoxItem Content="Ranged Weapon"/>
+                        </ComboBox>
+
+                        <ComboBox x:Name="itemRarityCreateCb" FontSize="20" Width="400" Header="*Item Rarity" Margin="0,8,0,0">
+                            <ComboBoxItem Content="Common"/>
+                            <ComboBoxItem Content="Uncommon"/>
+                            <ComboBoxItem Content="Rare"/>
+                            <ComboBoxItem Content="Legendary"/>
+                            <ComboBoxItem Content="Mythic"/>
+                        </ComboBox>
+
+                        <TextBox PlaceholderText="Additional Effects" FontSize="20" x:Name="additionalEffectsCreateTb" Width="400" 
+                         Height="200" AcceptsReturn="True" MaxLength="400" Header="Additional Effects" 
+                         TextWrapping="Wrap" Margin="0,8,0,0"/>
+
+                        <Button Content="Create" FontSize="20" Width="400" x:Name="createButton" Margin="0,16,0,20" VerticalAlignment="Center" Click="createButton_Click"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
