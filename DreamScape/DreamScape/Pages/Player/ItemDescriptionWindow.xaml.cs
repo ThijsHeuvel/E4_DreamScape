@@ -27,32 +27,59 @@ namespace DreamScape.Pages.Player
     /// </summary>
     public sealed partial class ItemDescriptionWindow : Window
     {
-        private PlayerItem? selectedPlayerItem;
-        private Item selectedItem;
-        public ItemDescriptionWindow(int selectedItemId)
+        private Item? selectedItem;
+        public ItemDescriptionWindow(int selectedItemId, bool isPlayerItem)
         {
             this.InitializeComponent();
-            using (AppDbContext db = new AppDbContext())
+            if (isPlayerItem)
             {
-                selectedPlayerItem = db.PlayerItems
-                    .Where(playeritem => playeritem.Id == selectedItemId)
-                    .Include(playeritem => playeritem.Item)
-                    .FirstOrDefault();
-
+                selectedItem = GetPlayerItemData(selectedItemId);
+            }
+            else
+            {
+                selectedItem = GetItemData(selectedItemId);
             }
 
-            if (selectedPlayerItem == null)
+            if (selectedItem == null)
             {
                 this.Close();
                 return;
             }
 
-            selectedItem = selectedPlayerItem.Item;
-
             itemNameTbl.Text = $"{selectedItem.Name} ({selectedItem.Type})";
             rarityTbl.Text = selectedItem.Rarity.ToString();
             itemDescTbl.Text = selectedItem.Description;
             additionalEffectsTbl.Text = selectedItem.AdditionalEffects;
+        }
+
+        private Item? GetPlayerItemData(int playerItemId)
+        {
+            PlayerItem? playerItem;
+            using (AppDbContext db = new AppDbContext())
+            {
+                playerItem = db.PlayerItems
+                    .Where(playerItem => playerItem.Id == playerItemId)
+                    .Include(playerItem => playerItem.Item)
+                    .FirstOrDefault();
+
+                if (playerItem == null)
+                {
+                    return null;
+                }
+            }
+            return playerItem.Item;
+        }
+
+        private Item? GetItemData(int itemId)
+        {
+            Item? returnItem;
+            using (AppDbContext db = new AppDbContext())
+            {
+                returnItem = db.Items
+                    .Where(item => item.Id == itemId)
+                    .FirstOrDefault();
+            }
+            return returnItem;
         }
     }
 }

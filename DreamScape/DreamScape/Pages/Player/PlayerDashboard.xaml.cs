@@ -74,7 +74,7 @@ namespace DreamScape.Pages.Player
         private void myItemsLv_ItemClick(object sender, ItemClickEventArgs e)
         {
             PlayerItem selectedPlayerItem = (PlayerItem)e.ClickedItem;
-            ItemDescriptionWindow descriptionWindow = new ItemDescriptionWindow(selectedPlayerItem.Id);
+            ItemDescriptionWindow descriptionWindow = new ItemDescriptionWindow(selectedPlayerItem.Id, true);
             descriptionWindow.Title = selectedPlayerItem.Item.Name;
             descriptionWindow.Activate();
         }
@@ -101,7 +101,7 @@ namespace DreamScape.Pages.Player
         private void availableItemsLv_ItemClick(object sender, ItemClickEventArgs e)
         {
             Item selectedItem = (Item)e.ClickedItem;
-            ItemDescriptionWindow descriptionWindow = new ItemDescriptionWindow(selectedItem.Id);
+            ItemDescriptionWindow descriptionWindow = new ItemDescriptionWindow(selectedItem.Id, false);
             descriptionWindow.Title = selectedItem.Name;
             descriptionWindow.Activate();
         }
